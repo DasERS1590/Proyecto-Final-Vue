@@ -1,10 +1,11 @@
 # proyecto-vue
 ## Estructura de Vue
-
+```
 <template>: Define la estructura HTML del componente.
 <script>: Contiene la lógica del componente, como el manejo de datos y métodos.
 data(): Define el estado local del componente, como los datos del formulario y los registros.
 methods: Incluye las funciones para manejar eventos (guardar, editar, eliminar).
+```
 
 ## Project setup
 ```
