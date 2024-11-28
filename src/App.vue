@@ -18,8 +18,9 @@ import DatosEquipo from './components/datosEquipo.vue';
 import ConfigEquipo from './components/configEquipo.vue';
 import ConfigRed from './components/configRed.vue';
 import ControlCambios from './components/controlCambios.vue';
-import FormUbicacion from './components/formMantenimiento.vue';
-import formMantenimiento from './components/formUbicacion.vue';
+import FormUbicacion from './components/formUbicacion.vue';
+import FormMantenimiento from './components/formMantenimiento.vue';
+
 
 
 export default {
@@ -31,8 +32,8 @@ export default {
         'ConfigEquipo',
         'ConfigRed',
         'ControlCambios',
-        'Ubi',
-        'Mantenimiento',
+        'FormUbicacion',
+        'FormMantenimiento',
       ],
     };
   },
@@ -47,7 +48,7 @@ export default {
     ConfigRed,
     ControlCambios,
     FormUbicacion,
-    formMantenimiento,
+    FormMantenimiento,
   },
   methods: {
     nextPage() {

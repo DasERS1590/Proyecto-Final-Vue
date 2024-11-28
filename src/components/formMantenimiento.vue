@@ -1,32 +1,37 @@
 <template>
   <div>
-    <h2>Mantenimiento</h2>
-    <form @submit.prevent="guardarMantenimiento">
+    <h2>Mantenimientos</h2>
+    <form @submit.prevent="agregarMantenimiento">
       <label>
         Tipo de Mantenimiento:
-        <select v-model="formData.tipo">
-          <option value="preventivo">Preventivo</option>
-          <option value="correctivo">Correctivo</option>
+        <select v-model="nuevoMantenimiento.tipo">
+          <option value="Preventivo">Preventivo</option>
+          <option value="Correctivo">Correctivo</option>
         </select>
       </label>
-
       <label>
         Fecha:
-        <input type="date" v-model="formData.fecha" />
+        <input type="date" v-model="nuevoMantenimiento.fecha" />
       </label>
-
       <label>
-        Realizó:
-        <input type="text" v-model="formData.realizo" />
+        Realizado Por:
+        <input type="text" v-model="nuevoMantenimiento.realizadoPor" />
       </label>
-
       <label>
         Observaciones:
-        <textarea v-model="formData.observaciones"></textarea>
+        <textarea v-model="nuevoMantenimiento.observaciones"></textarea>
       </label>
-
-      <button type="submit">Guardar</button>
+      <button type="submit">{{ editIndex === null ? 'Agregar' : 'Actualizar' }}</button>
     </form>
+
+    <h3>Historial de Mantenimientos</h3>
+    <ul>
+      <li v-for="(mantenimiento, index) in mantenimientos" :key="index">
+        <span>{{ mantenimiento.tipo }} - {{ mantenimiento.fecha }} - {{ mantenimiento.realizadoPor }}</span>
+        <button @click="editarMantenimiento(index)">Editar</button>
+        <button @click="eliminarMantenimiento(index)">Eliminar</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -34,25 +39,41 @@
 export default {
   data() {
     return {
-      formData: {
-        tipo: '',
-        fecha: '',
-        realizo: '',
-        observaciones: '',
+      nuevoMantenimiento: {
+        tipo: "Preventivo",
+        fecha: "",
+        realizadoPor: "",
+        observaciones: "",
       },
+      mantenimientos: [],
+      editIndex: null,
     };
   },
   methods: {
-    guardarMantenimiento() {
-      console.log('Mantenimiento guardado:', this.formData);
-      // Lógica adicional para guardar datos
+    agregarMantenimiento() {
+      if (this.editIndex === null) {
+        this.mantenimientos.push({ ...this.nuevoMantenimiento });
+      } else {
+        this.mantenimientos[this.editIndex] = { ...this.nuevoMantenimiento };
+        this.editIndex = null;
+      }
+      this.resetFormulario();
+    },
+    editarMantenimiento(index) {
+      this.nuevoMantenimiento = { ...this.mantenimientos[index] };
+      this.editIndex = index;
+    },
+    eliminarMantenimiento(index) {
+      this.mantenimientos.splice(index, 1);
+    },
+    resetFormulario() {
+      this.nuevoMantenimiento = {
+        tipo: "Preventivo",
+        fecha: "",
+        realizadoPor: "",
+        observaciones: "",
+      };
     },
   },
-};
-</script>
-
-<script>
-export default {
-  name: 'FormMantenimiento',
 };
 </script>

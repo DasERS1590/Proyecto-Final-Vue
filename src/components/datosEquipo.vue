@@ -3,6 +3,10 @@
     <h2>Datos del Equipo</h2>
     <form @submit.prevent="guardarDatosEquipo">
       <label>
+        Número de Ficha:
+        <input type="text" v-model="formData.numeroFicha" />
+      </label>
+      <label>
         Fecha:
         <input type="date" v-model="formData.fecha" />
       </label>
@@ -26,7 +30,7 @@
         Función del Equipo:
         <input type="text" v-model="formData.funcion" />
       </label>
-      <button type="submit">Guardar</button>
+      <button type="submit">{{ editIndex === null ? 'Guardar' : 'Actualizar' }}</button>
     </form>
 
     <h3>Registros</h3>
@@ -45,6 +49,7 @@ export default {
   data() {
     return {
       formData: {
+        numeroFicha: "",
         fecha: "",
         codigoInventario: "",
         marca: "",
@@ -77,6 +82,7 @@ export default {
     },
     resetFormulario() {
       this.formData = {
+        numeroFicha: "",
         fecha: "",
         codigoInventario: "",
         marca: "",

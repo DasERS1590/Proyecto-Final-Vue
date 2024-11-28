@@ -1,24 +1,30 @@
 <template>
   <div>
-    <h2>Ubicación</h2>
-    <form @submit.prevent="guardarUbicacion">
+    <h2>Ubicaciones</h2>
+    <form @submit.prevent="agregarFila">
       <label>
         Área/Dependencia:
-        <input type="text" v-model="formData.area" />
+        <input type="text" v-model="nuevaFila.area" />
       </label>
-
       <label>
         Responsable:
-        <input type="text" v-model="formData.responsable" />
+        <input type="text" v-model="nuevaFila.responsable" />
       </label>
-
       <label>
         Fecha de Instalación/Traslado:
-        <input type="date" v-model="formData.fecha" />
+        <input type="date" v-model="nuevaFila.fechaInstalacion" />
       </label>
-
-      <button type="submit">Guardar</button>
+      <button type="submit">{{ editIndex === null ? 'Agregar' : 'Actualizar' }}</button>
     </form>
+
+    <h3>Ubicaciones Registradas</h3>
+    <ul>
+      <li v-for="(fila, index) in filas" :key="index">
+        <span>{{ fila.area }} - {{ fila.responsable }} - {{ fila.fechaInstalacion }}</span>
+        <button @click="editarFila(index)">Editar</button>
+        <button @click="eliminarFila(index)">Eliminar</button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -26,24 +32,39 @@
 export default {
   data() {
     return {
-      formData: {
-        area: '',
-        responsable: '',
-        fecha: '',
+      nuevaFila: {
+        area: "",
+        responsable: "",
+        fechaInstalacion: "",
       },
+      filas: [],
+      editIndex: null,
     };
   },
   methods: {
-    guardarUbicacion() {
-      console.log('Ubicación guardada:', this.formData);
-      // Lógica adicional para guardar datos
+    agregarFila() {
+      if (this.editIndex === null) {
+        this.filas.push({ ...this.nuevaFila });
+      } else {
+        this.filas[this.editIndex] = { ...this.nuevaFila };
+        this.editIndex = null;
+      }
+      this.resetFila();
+    },
+    editarFila(index) {
+      this.nuevaFila = { ...this.filas[index] };
+      this.editIndex = index;
+    },
+    eliminarFila(index) {
+      this.filas.splice(index, 1);
+    },
+    resetFila() {
+      this.nuevaFila = {
+        area: "",
+        responsable: "",
+        fechaInstalacion: "",
+      };
     },
   },
-};
-</script>
-
-<script>
-export default {
-  name: 'FormUbicacion',
 };
 </script>
