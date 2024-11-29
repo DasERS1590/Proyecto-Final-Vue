@@ -126,6 +126,7 @@ export default {
         this.editIndex = null;
       }
       console.log('Configuración del equipo guardada:', this.configuraciones);
+      this.guardarConfiguraciones();
       this.resetFormulario();
     },
     editar(index) {
@@ -134,6 +135,7 @@ export default {
     },
     eliminar(index) {
       this.configuraciones.splice(index, 1);
+      this.guardarConfiguraciones();
     },
     guardarConfiguraciones() {
       // Guardar las configuraciones en localStorage para persistencia

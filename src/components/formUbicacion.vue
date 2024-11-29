@@ -56,6 +56,7 @@ export default {
         this.filas[this.editIndex] = { ...this.nuevaFila };
         this.editIndex = null;
       }
+      this.guardarFilas();
       this.resetFila();
     },
     editarFila(index) {
@@ -64,6 +65,7 @@ export default {
     },
     eliminarFila(index) {
       this.filas.splice(index, 1);
+      this.guardarFilas();
     },
     resetFila() {
       this.nuevaFila = {

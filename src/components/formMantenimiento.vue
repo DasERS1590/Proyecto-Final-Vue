@@ -67,6 +67,7 @@ export default {
         this.mantenimientos[this.editIndex] = { ...this.nuevoMantenimiento };
         this.editIndex = null;
       }
+      this.guardarMantenimientos();
       this.resetFormulario();
     },
     editarMantenimiento(index) {
@@ -75,6 +76,7 @@ export default {
     },
     eliminarMantenimiento(index) {
       this.mantenimientos.splice(index, 1);
+      this.guardarMantenimientos();
     },
     resetFormulario() {
       this.nuevoMantenimiento = {

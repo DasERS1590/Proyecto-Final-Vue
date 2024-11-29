@@ -164,6 +164,7 @@ export default {
         this.filasSistema[this.editIndexSistema] = { ...this.nuevaFilaSistema };
         this.editIndexSistema = null;
       }
+      this.guardarSistemas();
       this.resetFilaSistema();
     },
     editarFilaSistema(index) {
@@ -172,6 +173,7 @@ export default {
     },
     eliminarFilaSistema(index) {
       this.filasSistema.splice(index, 1);
+      this.guardarSistemas();
     },
     resetFilaSistema() {
       this.nuevaFilaSistema = {
@@ -195,6 +197,7 @@ export default {
         this.filasAplicacion[this.editIndexAplicacion] = { ...this.nuevaFilaAplicacion };
         this.editIndexAplicacion = null;
       }
+      this.guardarAplicaciones();
       this.resetFilaAplicacion();
     },
     editarFilaAplicacion(index) {
@@ -203,6 +206,7 @@ export default {
     },
     eliminarFilaAplicacion(index) {
       this.filasAplicacion.splice(index, 1);
+      this.guardarAplicaciones();
     },
     resetFilaAplicacion() {
       this.nuevaFilaAplicacion = {

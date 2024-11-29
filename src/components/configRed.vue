@@ -92,6 +92,7 @@ export default {
       } else if (tipo === "publica") {
         this.formData.ipPublicas.splice(index, 1);
       }
+      this.guardarConfiguraciones();
     },
     guardarConfigRed() {
       if (this.editIndex === null) {
@@ -100,6 +101,7 @@ export default {
         this.configuraciones[this.editIndex] = { ...this.formData };
         this.editIndex = null;
       }
+      this.guardarConfiguraciones();
       this.resetFormulario();
     },
     editar(index) {
@@ -108,6 +110,7 @@ export default {
     },
     eliminar(index) {
       this.configuraciones.splice(index, 1);
+      this.guardarConfiguraciones();
     },
     guardarConfiguraciones() {
       localStorage.setItem("configuracionesRed", JSON.stringify(this.configuraciones));

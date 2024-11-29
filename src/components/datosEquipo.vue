@@ -123,21 +123,17 @@ export default {
   methods: {
     guardarDatosEquipo() {
       if (this.editIndex === null) {
-        // Agregar nuevo registro
         this.registros.push({ ...this.formData });
       } else {
-        // Modificar registro existente
         this.registros[this.editIndex] = { ...this.formData };
         this.editIndex = null;
       }
+      this.guardarRegistros(); // Guarda inmediatamente después de modificar
       this.resetFormulario();
-    },
-    editar(index) {
-      this.formData = { ...this.registros[index] };
-      this.editIndex = index;
     },
     eliminar(index) {
       this.registros.splice(index, 1);
+      this.guardarRegistros(); // Guarda inmediatamente después de eliminar
     },
     resetFormulario() {
       this.formData = {
