@@ -41,6 +41,13 @@ export default {
       editIndex: null,
     };
   },
+  mounted() {
+    // Cargar las filas desde localStorage cuando el componente se monte
+    const savedFilas = JSON.parse(localStorage.getItem("ubicaciones"));
+    if (savedFilas) {
+      this.filas = savedFilas;
+    }
+  },
   methods: {
     agregarFila() {
       if (this.editIndex === null) {
@@ -64,6 +71,10 @@ export default {
         responsable: "",
         fechaInstalacion: "",
       };
+    },
+    guardarFilas() {
+      // Guardar las filas en localStorage
+      localStorage.setItem("ubicaciones", JSON.stringify(this.filas));
     },
   },
 };

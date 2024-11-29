@@ -27,7 +27,10 @@
     <h3>Historial de Mantenimientos</h3>
     <ul>
       <li v-for="(mantenimiento, index) in mantenimientos" :key="index">
-        <span>{{ mantenimiento.tipo }} - {{ mantenimiento.fecha }} - {{ mantenimiento.realizadoPor }}</span>
+        <span>
+          {{ mantenimiento.tipo }} - {{ mantenimiento.fecha }} - {{ mantenimiento.realizadoPor }} <br />
+          <strong>Observaciones:</strong> {{ mantenimiento.observaciones }}
+        </span>
         <button @click="editarMantenimiento(index)">Editar</button>
         <button @click="eliminarMantenimiento(index)">Eliminar</button>
       </li>
@@ -48,6 +51,13 @@ export default {
       mantenimientos: [],
       editIndex: null,
     };
+  },
+  mounted() {
+    // Cargar los mantenimientos desde localStorage cuando se monte el componente
+    const savedMantenimientos = JSON.parse(localStorage.getItem("mantenimientos"));
+    if (savedMantenimientos) {
+      this.mantenimientos = savedMantenimientos;
+    }
   },
   methods: {
     agregarMantenimiento() {
@@ -73,6 +83,10 @@ export default {
         realizadoPor: "",
         observaciones: "",
       };
+    },
+    guardarMantenimientos() {
+      // Guardar los mantenimientos en localStorage
+      localStorage.setItem("mantenimientos", JSON.stringify(this.mantenimientos));
     },
   },
 };

@@ -40,7 +40,17 @@
     <h3>Registros</h3>
     <ul>
       <li v-for="(red, index) in configuraciones" :key="index">
-        <span>{{ red.nombreEquipo }} - {{ red.dominioRed }}</span>
+        <span>
+          {{ red.nombreEquipo }} - {{ red.dominioRed }} <br />
+          <strong>IP Privadas:</strong>
+          <ul>
+            <li v-for="(ip, ipIndex) in red.ipPrivadas" :key="'privada-' + ipIndex">{{ ip }}</li>
+          </ul>
+          <strong>IP Públicas:</strong>
+          <ul>
+            <li v-for="(ip, ipIndex) in red.ipPublicas" :key="'publica-' + ipIndex">{{ ip }}</li>
+          </ul>
+        </span>
         <button @click="editar(index)">Editar</button>
         <button @click="eliminar(index)">Eliminar</button>
       </li>
@@ -61,6 +71,12 @@ export default {
       configuraciones: [],
       editIndex: null,
     };
+  },
+  mounted() {
+    const savedRedes = JSON.parse(localStorage.getItem("configuracionesRed"));
+    if (savedRedes) {
+      this.configuraciones = savedRedes;
+    }
   },
   methods: {
     agregarIP(tipo) {
@@ -92,6 +108,9 @@ export default {
     },
     eliminar(index) {
       this.configuraciones.splice(index, 1);
+    },
+    guardarConfiguraciones() {
+      localStorage.setItem("configuracionesRed", JSON.stringify(this.configuraciones));
     },
     resetFormulario() {
       this.formData = {

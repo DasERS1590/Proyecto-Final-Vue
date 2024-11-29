@@ -143,8 +143,20 @@ export default {
       editIndexAplicacion: null,
     };
   },
+  mounted() {
+    // Cargar datos almacenados en localStorage cuando se monte el componente
+    const savedSistemas = JSON.parse(localStorage.getItem("sistemasOperativos"));
+    const savedAplicaciones = JSON.parse(localStorage.getItem("aplicaciones"));
+
+    if (savedSistemas) {
+      this.filasSistema = savedSistemas;
+    }
+    if (savedAplicaciones) {
+      this.filasAplicacion = savedAplicaciones;
+    }
+  },
   methods: {
-    // Métodos para Sistemas Operativos
+  // Métodos para Sistemas Operativos
     agregarFilaSistema() {
       if (this.editIndexSistema === null) {
         this.filasSistema.push({ ...this.nuevaFilaSistema });
@@ -169,6 +181,10 @@ export default {
         licencia: "",
         fecha: "",
       };
+    },
+    guardarSistemas() {
+      // Guardar en localStorage
+      localStorage.setItem("sistemasOperativos", JSON.stringify(this.filasSistema));
     },
 
     // Métodos para Aplicaciones
@@ -196,6 +212,10 @@ export default {
         licencia: "",
         fecha: "",
       };
+    },
+    guardarAplicaciones() {
+      // Guardar en localStorage
+      localStorage.setItem("aplicaciones", JSON.stringify(this.filasAplicacion));
     },
   },
 };

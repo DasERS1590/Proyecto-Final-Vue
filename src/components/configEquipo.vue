@@ -44,11 +44,7 @@
 
       <label>
         Disco Duro:
-        <input 
-          type="number" 
-          v-model.number="formData.discoDuro" 
-          @input="validarDiscoDuro" 
-        />
+        <input type="number" v-model.number="formData.discoDuro" @input="validarDiscoDuro" />
       </label>
 
       <label>
@@ -61,7 +57,16 @@
     <h3>Registros</h3>
     <ul>
       <li v-for="(config, index) in configuraciones" :key="index">
-        <span>{{ config.procesador }} - {{ config.tipoServicio }}</span>
+        <span>
+          Virtual o Fisico:{{ config.virtual ? 'Virtual' : 'Físico' }} -
+          En Produccion o Desarrollo:{{ config.produccion ? 'Producción' : 'Desarrollo' }} -
+          {{ config.procesador }} -
+          {{ config.velocidad }} -
+          {{ config.cantidad }} -
+          {{ config.memoriaRam }} -
+          {{ config.discoDuro }}
+          {{ config.tipoServicio }} -
+        </span>
         <button @click="editar(index)">Editar</button>
         <button @click="eliminar(index)">Eliminar</button>
       </li>
@@ -88,6 +93,13 @@ export default {
       configuraciones: [],
       editIndex: null,
     };
+  },
+  mounted() {
+    // Cargar los datos almacenados desde localStorage cuando el componente se monte
+    const savedConfiguraciones = JSON.parse(localStorage.getItem("configuracionesEquipo"));
+    if (savedConfiguraciones) {
+      this.configuraciones = savedConfiguraciones;
+    }
   },
   methods: {
     toggleVirtualFisico(seleccion) {
@@ -122,6 +134,10 @@ export default {
     },
     eliminar(index) {
       this.configuraciones.splice(index, 1);
+    },
+    guardarConfiguraciones() {
+      // Guardar las configuraciones en localStorage para persistencia
+      localStorage.setItem("configuracionesEquipo", JSON.stringify(this.configuraciones));
     },
     resetFormulario() {
       this.formData = {

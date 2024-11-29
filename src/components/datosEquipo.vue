@@ -36,7 +36,15 @@
     <h3>Registros</h3>
     <ul>
       <li v-for="(equipo, index) in registros" :key="index">
-        <span>{{ equipo.codigoInventario }} - {{ equipo.marca }} - {{ equipo.modelo }}</span>
+        <span>
+          {{ equipo.numeroFicha }} -
+          {{ equipo.fecha }} -
+          {{ equipo.codigoInventario }} -
+          {{ equipo.marca }} -
+          {{ equipo.modelo }} -
+          {{ equipo.serial }} -
+          {{ equipo.funcion }}
+        </span>
         <button @click="editar(index)">Editar</button>
         <button @click="eliminar(index)">Eliminar</button>
       </li>
@@ -60,6 +68,13 @@ export default {
       registros: [],
       editIndex: null,
     };
+  },
+  mounted() {
+    // Cargar registros desde localStorage cuando se monte el componente
+    const savedRegistros = JSON.parse(localStorage.getItem("registrosEquipos"));
+    if (savedRegistros) {
+      this.registros = savedRegistros;
+    }
   },
   methods: {
     guardarDatosEquipo() {
@@ -90,6 +105,10 @@ export default {
         serial: "",
         funcion: "",
       };
+    },
+    guardarRegistros() {
+      // Guardar registros en localStorage
+      localStorage.setItem("registrosEquipos", JSON.stringify(this.registros));
     },
   },
 };
