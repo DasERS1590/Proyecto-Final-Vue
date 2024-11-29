@@ -1,39 +1,50 @@
 <template>
   <div id="app">
-    <header>
-      <h1>Gestión de Equipos</h1>
-    </header>
+    
+    <nav class="navbar">
+      <div class="container-fluid">
+        <h1  href="#">
+          Gestion de equipos
+        </h1>
+      </div>
+    </nav>
+
     <main>
+
       <component :is="currentComponent" />
-      <nav>
-        <button @click="prevPage" :disabled="currentIndex === 0">Anterior</button>
-        <button @click="nextPage" :disabled="currentIndex === components.length - 1">Siguiente</button>
+
+      <nav class="btn_doc">
+
+        <button class="btn btn-outline-dark" id="btn_ant" @click="prevPage" :disabled="currentIndex === 0">Anterior</button>
+        <button class="btn btn-outline-primary" id="btn_sig" @click="nextPage" :disabled="currentIndex === components.length - 1">Siguiente</button>
+
       </nav>
+
     </main>
+
   </div>
+
 </template>
 
 <script>
-import DatosEquipo from './components/datosEquipo.vue';
-import ConfigEquipo from './components/configEquipo.vue';
-import ConfigRed from './components/configRed.vue';
-import ControlCambios from './components/controlCambios.vue';
-import FormUbicacion from './components/formUbicacion.vue';
-import FormMantenimiento from './components/formMantenimiento.vue';
-
-
+import DatosEquipo from "./components/datosEquipo.vue";
+import ConfigEquipo from "./components/configEquipo.vue";
+import ConfigRed from "./components/configRed.vue";
+import ControlCambios from "./components/controlCambios.vue";
+import FormUbicacion from "./components/formUbicacion.vue";
+import FormMantenimiento from "./components/formMantenimiento.vue";
 
 export default {
   data() {
     return {
       currentIndex: 0,
       components: [
-        'DatosEquipo',
-        'ConfigEquipo',
-        'ConfigRed',
-        'ControlCambios',
-        'FormUbicacion',
-        'FormMantenimiento',
+        "DatosEquipo",
+        "ConfigEquipo",
+        "ConfigRed",
+        "ControlCambios",
+        "FormUbicacion",
+        "FormMantenimiento",
       ],
     };
   },
@@ -66,11 +77,43 @@ export default {
 </script>
 
 <style>
-/* Añade estilo básico para la navegación */
+
+*{
+  font-family: monospace;
+}
+
+.navbar{
+  margin: 1%;
+  border-radius: 10px;
+  border: 3px solid rgb(87, 87, 87);
+  padding: 1%;
+  padding-top: 1.3%;
+}
+
+h1{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 200%;
+}
+
 nav {
   margin-top: 20px;
 }
-button {
-  margin: 5px;
+
+.btn_doc {
+  margin-top: 5%;
+  width: 12.47%;
+  margin-left: 86.5%;
 }
+
+#btn_ant{
+  font-size: 140%;
+  margin-right: 5%;
+}
+
+#btn_sig{
+  font-size: 130%;
+}
+
+
 </style>
