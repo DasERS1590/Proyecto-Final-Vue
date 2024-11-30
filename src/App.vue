@@ -112,8 +112,9 @@ nav {
 
 .btn_doc {
   margin-top: 5%;
-  width: 12.47%;
+  width: 13.47%;
   margin-left: 86.5%;
+  margin-bottom: 3%;
 }
 
 #btn_ant {
@@ -124,4 +125,6 @@ nav {
 #btn_sig {
   font-size: 130%;
 }
+
+
 </style>
