@@ -1,8 +1,6 @@
 <template>
   <div class="doc_cb">
     <h4 class="title_cb">4. Control de cambios</h4>
-    <!-- Sistemas Operativos -->
-    <div>
 
       <section class="conf_so">
 
@@ -102,8 +100,6 @@
 
       </section>
 
-
-    </div>
 
     <section class="conf_app">
 
