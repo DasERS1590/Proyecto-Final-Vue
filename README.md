@@ -7,7 +7,7 @@ data(): Define el estado local del componente, como los datos del formulario y l
 methods: Incluye las funciones para manejar eventos (guardar, editar, eliminar).
 ```
 
-## Project setup
+## Intalacion del proyecto
 ```
 npm install
 ```
